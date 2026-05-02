@@ -1,4 +1,4 @@
-﻿# Support Triage Agent - Hackathon Submission (v3)
+﻿# Support Triage Agent - Hackathon Submission 
 
 An evaluator-ready, production-style support triage system for three domains:
 - HackerRank
@@ -138,7 +138,7 @@ Presentation changes do not alter evaluator logic or CSV schema.
 4. Run evaluation:
    - `python evaluate.py -v`
 
-## Why this scores well for hackathon judging
+## Why this scores well for  judging
 
 - Reliability-first: deterministic baseline, no network dependency required.
 - Safety-first: escalation over guessing for risky/uncertain cases.
