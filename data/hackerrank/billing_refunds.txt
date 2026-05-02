@@ -1,0 +1,3 @@
+﻿HackerRank subscription billing supports invoice corrections and refund requests after validation.
+Refund requests are reviewed by billing specialists and are not instantly approved by chat support.
+Payment method update failures should be escalated with transaction reference IDs.

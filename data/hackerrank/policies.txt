@@ -1,0 +1,3 @@
+﻿HackerRank candidates can reset their assessment environment only before submission.
+If a coding test crashes, support can reopen a test window after identity verification.
+Recruiter shortlist outcomes cannot be changed by support agents.

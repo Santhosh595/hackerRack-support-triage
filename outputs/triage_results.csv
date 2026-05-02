@@ -1,0 +1,2 @@
+ticket_id,timestamp,domain,request_type,severity,escalate,escalation_code,escalation_reason,domain_confidence,request_type_confidence,retrieval_confidence,response_confidence,citations,response_summary
+escalate,None,We cannot safely resolve this automatically. A human specialist has been engaged.,High-risk/sensitive case detected.,invalid

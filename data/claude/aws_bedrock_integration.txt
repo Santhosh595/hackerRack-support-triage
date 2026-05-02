@@ -1,0 +1,3 @@
+﻿Claude on AWS Bedrock may return authentication errors when IAM permissions are missing.
+Integration checks include region availability, model access grants, and correct API endpoints.
+Persistent Bedrock throttling or quota failures should be escalated with request IDs.

@@ -1,0 +1,3 @@
+﻿Travel card blocks can trigger when unusual country usage is detected.
+Cardholders should confirm travel notices and verify recent transactions.
+If card remains blocked abroad, escalate to emergency card support.

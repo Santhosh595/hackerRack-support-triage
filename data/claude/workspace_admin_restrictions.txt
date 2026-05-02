@@ -1,0 +1,3 @@
+﻿Workspace access restoration requires owner or admin verification.
+Support cannot grant admin privileges without organization authorization.
+Requests from non-admin users for forced role changes are escalated for manual review.

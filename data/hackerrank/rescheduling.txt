@@ -1,0 +1,3 @@
+﻿Candidates can request assessment rescheduling when conflicts are reported before deadline.
+Recruiters or assessment owners approve schedule adjustments based on policy.
+Support cannot force acceptance into a closed assessment slot.

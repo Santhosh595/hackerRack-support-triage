@@ -1,0 +1,3 @@
+﻿If an assessment crashes before submission, candidates can request a reopen window.
+Support requires candidate ID, assessment link, and approximate failure time.
+Submission sync delays may take up to 15 minutes before recruiter dashboards update.

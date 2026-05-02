@@ -1,0 +1,3 @@
+﻿Transaction declines may occur due to insufficient funds, issuer restrictions, or merchant risk checks.
+Support should collect transaction time, amount, and merchant details for diagnosis.
+Repeated declines with valid funds should be escalated for issuer-side review.

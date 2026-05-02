@@ -1,0 +1,3 @@
+﻿Visa cardholders should immediately lock cards when theft is suspected.
+Chargebacks and payment disputes requiring evidence review are escalated to specialists.
+Support cannot directly reverse merchant decisions without formal dispute workflows.

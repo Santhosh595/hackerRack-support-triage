@@ -1,0 +1,3 @@
+﻿Claude data controls allow retention configuration and enterprise privacy options.
+Sensitive data handling requests may require security team review.
+Support can provide policy guidance but cannot bypass organizational privacy controls.
