@@ -31,7 +31,7 @@ FIXTURES = [
         text="My coding test page shows a UI bug and fails to load timer.",
         expected_domain="HackerRank",
         expected_request_type="bug",
-        expected_status="resolved",
+        expected_status="replied",
     ),
     Fixture(
         ticket_id="FX-002",
@@ -39,7 +39,7 @@ FIXTURES = [
         text="How do I recover workspace access after lockout?",
         expected_domain="Claude",
         expected_request_type="product_issue",
-        expected_status="resolved",
+        expected_status="replied",
     ),
     Fixture(
         ticket_id="FX-003",
@@ -47,7 +47,7 @@ FIXTURES = [
         text="There is fraud on my card and I need urgent help.",
         expected_domain="Visa",
         expected_request_type="invalid",
-        expected_status="escalate",
+        expected_status="escalated",
     ),
     Fixture(
         ticket_id="FX-004",
@@ -55,7 +55,7 @@ FIXTURES = [
         text="Please add a feature to export all assessment attempts as CSV.",
         expected_domain="HackerRank",
         expected_request_type="feature_request",
-        expected_status="resolved",
+        expected_status="replied",
     ),
 ]
 

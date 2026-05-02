@@ -136,9 +136,17 @@ def run_interactive(pipeline: TriagePipeline) -> None:
     elif TRIAGE_API_KEY:
         print("LLM augmentation is enabled.\n")
 
+    transcript_path = "chat_transcript.txt"
+    with open(transcript_path, "a", encoding="utf-8") as f:
+        f.write("\n--- New Interactive Session ---\n")
+
     while True:
         company = _prompt("Company [HackerRank/Claude/Visa/blank] > ")
         ticket_text = _prompt("Ticket > ")
+        
+        with open(transcript_path, "a", encoding="utf-8") as f:
+            f.write(f"User (Company: {company}): {ticket_text}\n")
+            
         if ticket_text.lower() == "exit":
             print(f"{Fore.CYAN}Session ended.{Style.RESET_ALL}")
             break
@@ -151,6 +159,10 @@ def run_interactive(pipeline: TriagePipeline) -> None:
         _print_progress()
         result = pipeline.run(ticket)
         append_result_csv(OUTPUT_CSV, result)
+        
+        with open(transcript_path, "a", encoding="utf-8") as f:
+            f.write(f"AI Agent: [Status: {result.status}, Area: {result.product_area}] {result.response}\n\n")
+
         _print_result_card(
             result_status=result.status,
             product_area=result.product_area,
