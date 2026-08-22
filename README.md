@@ -70,15 +70,34 @@ Legacy v2 paths are deprecated and excluded from runtime behavior.
 
 Deterministic fallback is the default for reliability and reproducible evaluation.
 
-- `TRIAGE_API_KEY` present -> optional LLM augmentation enabled
-- `TRIAGE_API_KEY` missing -> deterministic mode
-- `TRIAGE_API_KEY` set but `TRIAGE_LLM_URL` missing -> startup warning + deterministic fallback
+The agent auto-detects an LLM provider from the environment, in priority order:
 
-Optional env vars:
-- `TRIAGE_API_KEY`
-- `TRIAGE_LLM_URL`
-- `TRIAGE_LLM_MODEL`
-- `TRIAGE_LLM_TIMEOUT_SEC`
+1. `OPENAI_API_KEY` (OpenAI)
+2. `ANTHROPIC_API_KEY` (Anthropic)
+3. `GOOGLE_API_KEY` (Google Gemini)
+4. `AZURE_OPENAI_API_KEY` (Azure OpenAI)
+5. `TRIAGE_LLM_URL` + `TRIAGE_API_KEY` set together (custom OpenAI-compatible endpoint)
+
+- No provider configured -> deterministic mode
+- Provider configured -> grounded LLM augmentation behind the same safety pipeline
+- Any LLM failure (network, auth, parse) -> falls back to the deterministic grounded response
+
+A startup warning is printed if an LLM provider is active but `TRIAGE_LLM_URL`
+is not set (informational only — built-in providers use their default endpoints).
+
+Provider selection (set one):
+- `OPENAI_API_KEY` (+ optional `OPENAI_BASE_URL`, `OPENAI_MODEL`)
+- `ANTHROPIC_API_KEY` (+ optional `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL`)
+- `GOOGLE_API_KEY` (+ optional `GOOGLE_BASE_URL`, `GOOGLE_MODEL`)
+- `AZURE_OPENAI_API_KEY` (+ `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_DEPLOYMENT`)
+- `TRIAGE_LLM_URL` + `TRIAGE_API_KEY` (+ optional `TRIAGE_LLM_MODEL`) for local/self-hosted OpenAI-compatible servers
+
+Tuning (optional):
+- `TRIAGE_LLM_TIMEOUT_SEC` (default 12)
+- `RETRIEVAL_CONFIDENCE_THRESHOLD` (default 0.07)
+- `RETRIEVAL_TOP_K` (default 3)
+
+See `.env.example` for the full annotated list.
 
 Environment loading is plain `os.environ` (Doppler-compatible, no SDK lock-in).
 
@@ -109,8 +128,19 @@ Presentation changes do not alter evaluator logic or CSV schema.
 
 - `main.py`
 - `evaluate.py`
+- `test_llm_config.py` - LLM provider-detection self-check
 - `requirements.txt`
+- `.env.example` - copy to `.env`; never commit `.env`
+- `AGENTS.md` - coding-agent working agreement (Orchestrate starter)
+- `chat_transcript.txt` - interactive session transcript (appended at runtime)
+- `support_tickets/`
+  - `support_tickets.csv` - input tickets (batch mode)
+  - `sample_support_tickets.csv` - provided sample set
+  - `output.csv` - written results
+- `logs/` - structured JSONL run logs (`triage_structured.jsonl`, `eval_v3.jsonl`)
+- `outputs/` - archived result snapshots
 - `code/`
+  - `__init__.py`
   - `config.py`
   - `models.py`
   - `classifiers.py`
@@ -123,6 +153,8 @@ Presentation changes do not alter evaluator logic or CSV schema.
   - `pipeline.py`
   - `logger.py`
   - `utils.py`
+  - `main.py` - entry-point shim delegating to the root runner (evaluator path)
+  - `README.md` - code-level notes
 - `data/`
   - `hackerrank/`
   - `claude/`
@@ -133,12 +165,14 @@ Presentation changes do not alter evaluator logic or CSV schema.
 1. Install dependencies:
    - `pip install -r requirements.txt`
 2. Ensure corpus docs exist in each domain folder under `data/`
-3. Run terminal demo:
+3. Run terminal demo (interactive):
    - `python main.py`
-4. Run evaluation:
+4. Run batch over the ticket CSV (evaluator path — reads `support_tickets/support_tickets.csv`, writes `support_tickets/output.csv`):
+   - `python main.py --batch`
+5. Run evaluation:
    - `python evaluate.py -v`
 
-## Why this scores well for  judging
+## Why this scores well for judging
 
 - Reliability-first: deterministic baseline, no network dependency required.
 - Safety-first: escalation over guessing for risky/uncertain cases.
