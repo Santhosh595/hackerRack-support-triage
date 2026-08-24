@@ -130,8 +130,10 @@ def run_interactive(pipeline: TriagePipeline) -> None:
 
     if USE_LLM and not TRIAGE_LLM_URL:
         print(
-            "WARNING: TRIAGE_API_KEY is set but TRIAGE_LLM_URL is missing. "
-            "LLM augmentation will fallback to deterministic mode."
+            "NOTE: A built-in provider key (OPENAI/ANTHROPIC/GOOGLE/AZURE) is set "
+            "without TRIAGE_LLM_URL, so LLM augmentation calls that provider's "
+            "default endpoint. Deterministic mode applies only when no provider "
+            "is configured or on LLM failure."
         )
     elif TRIAGE_API_KEY:
         print("LLM augmentation is enabled.\n")
