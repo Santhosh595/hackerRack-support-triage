@@ -1,4 +1,22 @@
-scikit-learn==1.5.2
-numpy==2.1.2
-scipy==1.14.1
+# Direct dependencies, pinned.
+#
+# Python 3.14 note: the previous pins (numpy 2.1.2 / scipy 1.14.1 /
+# scikit-learn 1.5.2) published no cp314 wheels and could not be installed on
+# this interpreter at all. These versions are the current releases and do ship
+# cp314 wheels. A frozen resolution of the full tree is in requirements.lock.txt.
+#
+# The three scientific packages below all require Python >= 3.12 at their
+# current versions, so each carries a marker: 3.12 and newer get the newest
+# release, and 3.10 and 3.11 get the newest release that still supports
+# them. Only code/retriever.py imports them (for TF-IDF and cosine
+# similarity); the classifiers the test suite covers are pure stdlib.
 colorama==0.4.6
+
+numpy==2.5.3 ; python_version >= "3.12"
+numpy==2.2.6 ; python_version < "3.12"
+
+scikit-learn==1.9.1 ; python_version >= "3.12"
+scikit-learn==1.5.2 ; python_version < "3.12"
+
+scipy==1.18.1 ; python_version >= "3.12"
+scipy==1.14.1 ; python_version < "3.12"

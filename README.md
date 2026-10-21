@@ -5,6 +5,10 @@ An evaluator-ready, production-style support triage system for three domains:
 - Claude
 - Visa
 
+[![CI](https://github.com/Santhosh595/hackerRack-support-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/Santhosh595/hackerRack-support-triage/actions/workflows/ci.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 The project is built for reliability-first judging: deterministic by default, safety-gated, and modular.
 
 ## What this solves
@@ -171,6 +175,21 @@ Presentation changes do not alter evaluator logic or CSV schema.
    - `python main.py --batch`
 5. Run evaluation:
    - `python evaluate.py -v`
+
+### Run tests
+
+```bash
+pip install -r requirements.txt
+pip install pytest
+pytest tests/
+```
+
+The suite covers the deterministic classifiers — prompt-injection detection,
+high-risk detection, domain classification, multi-domain ambiguity,
+request-type routing, and the escalation and refusal responses. It needs no
+network, no LLM key and no corpus: the classifiers are pure functions over a
+ticket, and `USE_LLM` is off unless explicitly enabled, so this is exactly
+the path a fresh clone takes.
 
 ## Why this scores well for judging
 
